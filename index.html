@@ -5,28 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Portfolio | Giuseppe Mattia Raso</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Chosen Palette: Corporate Slate & Teal (Professional, Trustworthy, Modern) -->
-    <!-- Application Structure Plan: The SPA is designed as an interactive professional dashboard rather than a static document. This structural choice prioritizes the immediate surfacing of key metrics (GPA, Budget Managed) to grab attention. The 'Experience' section utilizes a master-detail split view to allow recruiters to explore specific roles without losing the overall context. The 'Global Education' uses a chronological card layout. The 'Skills Analytics' section employs an interactive bar chart, allowing viewers to filter between Hard, Soft, and Tech skills, transforming a boring list into an engaging data discovery process. This architecture reduces cognitive load while encouraging active exploration of the candidate's profile. -->
-    <!-- Visualization & Content Choices: 1. Key Metrics -> Goal: Inform -> Viz: Dynamic Stat Cards -> Interaction: Hover lift -> Justification: Quickly communicates top achievements. 2. Experience -> Goal: Organize/Explore -> Viz: Interactive Master-Detail Layout -> Interaction: Clickable role list updating detail pane -> Justification: Keeps the interface clean while offering deep dives into specific responsibilities. 3. Skills -> Goal: Compare -> Viz: Horizontal Bar Chart (Chart.js) -> Interaction: Category filter buttons -> Justification: Visually quantifies skills and allows users to segment them logically. 4. Education -> Goal: Organize -> Viz: Thematic Cards -> Interaction: Hover effects -> Justification: Clearly delineates international academic history. NO SVG/Mermaid used; Unicode characters provide iconography. -->
+    <!-- Application Structure Plan: The SPA is designed as an interactive professional dashboard rather than a static document. The Hero section is expanded to accommodate "Information", "International Vision & ESG", and "Research Focus". The Experience section is transformed into "Experience & Projects" to include, via the master-detail layout, the Unical experience, the Red Bull simulation, and the National Negotiation Competition, allowing clean exploration of rich texts. Education adopts a two-column grid to accommodate longer descriptions without vertically overloading the view. Skills section uses a clean, modern Badge/Tag grid layout to present keywords without subjective numerical evaluations. -->
+    <!-- Visualization & Content Choices: 1. Information/Hero -> Goal: Inform -> Viz: Structured text blocks + KPIs -> Interaction: Linear reading -> Justification: Immediately provides context and vision. 2. Experience & Projects -> Goal: Explore -> Viz: Interactive Master-Detail Layout -> Interaction: Click on role list to update detail pane -> Justification: Keeps the interface clean while offering specific deep dives into robust simulations (e.g. Red Bull). 3. Education -> Goal: Organize -> Viz: Flexible Cards -> Interaction: Hover effects -> Justification: Clearly shows the global path. 4. Skills -> Goal: Categorize -> Viz: Skill Badges / Tags -> Interaction: Hover highlights -> Justification: Recruiter-friendly keyword layout that avoids subjective self-grading (like charts) while remaining highly scannable and ATS-like. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <style>
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 50vh;
-            max-height: 450px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
         .unicode-icon {
             font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
         }
@@ -50,40 +35,69 @@
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex-shrink-0 flex items-center font-bold text-xl tracking-tight text-slate-900">
-                    <span class="unicode-icon mr-2 text-2xl">⚖️</span> GMR Legal
+                    <span class="unicode-icon mr-2 text-2xl">⚖️</span> GMR Legal 📈
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#profile" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Profile</a>
                     <a href="#experience" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Experience</a>
+                    <a href="#projects" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Academic Projects</a>
                     <a href="#education" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Education</a>
-                    <a href="#skills" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Skills Analytics</a>
+                    <a href="#skills" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Skills</a>
+                    <a href="https://drive.google.com/file/d/1_GqQrx_GDRzAGMFdrlVZWWEDy-3bU3Lj/view?usp=drive_link" target="_blank" class="text-sm font-bold text-teal-600 hover:text-teal-700 transition-colors flex items-center bg-teal-50 px-3 py-1.5 rounded-md border border-teal-100"><span class="mr-1">📄</span> CV</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Header / Hero Section -->
-    <header id="profile" class="pt-20 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-            <div class="lg:col-span-2 space-y-6">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
-                    Giuseppe Mattia Raso
-                </h1>
-                <h2 class="text-xl sm:text-2xl text-teal-700 font-semibold">
-                    Junior Corporate Legal Specialist | M&A, ESG & Compliance
-                </h2>
-                <p class="text-lg text-slate-600 leading-relaxed max-w-3xl">
-                    Law degree candidate (GPA: 28/30) specializing in Corporate Governance, M&A, and ESG. Combines international academic rigor (USA, Denmark) with operational experience as a Legal Associate in budget management and cross-border contracting. Innovation-driven, integrating Legal Tech and AI tools to optimize research and drafting processes in support of the business.
-                </p>
+    <!-- Header / Profile Section -->
+    <header id="profile" class="pt-20 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Text Column -->
+            <div class="lg:col-span-8 space-y-8">
+                <div>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+                        Giuseppe Mattia Raso
+                    </h1>
+                    <h2 class="text-xl sm:text-2xl text-teal-700 font-semibold mb-6">
+                        Junior Corporate Legal Specialist | M&A, ESG & Compliance
+                    </h2>
+                    
+                    <div class="prose prose-slate max-w-none prose-p:leading-relaxed prose-p:text-slate-600">
+                        <p class="text-lg">
+                            <strong class="text-slate-900">Information:</strong> Law degree candidate <strong>(GPA: 28/30)</strong> with a strong specialization in <strong>Commercial Law</strong> and <strong>Corporate Governance</strong>. My vision of law is dynamic and business-oriented: I firmly believe that the legal function should be a strategic partner capable of mitigating risks while enabling business growth.
+                        </p>
+                        
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm my-6">
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center">
+                                <span class="unicode-icon mr-2 text-xl">𓍝 📈</span> M&A and ESG specialist: Cross-Border Expertise
+                            </h3>
+                            <p class="text-sm m-0">
+                                My educational background has a strong global imprint. I deepened my knowledge of Corporate Responsibility and Delaware Law at Widener University (USA) and cross-border M&A transactions at the University of Copenhagen. As a certified ESG Specialist from the ELSA & Deloitte Academy, I possess technical knowledge of the EU Taxonomy and the CSRD Directive, skills I now consider essential for extraordinary transactions and corporate governance restructuring.
+                            </p>
+                        </div>
+
+                        <p>
+                            <span class="unicode-icon mr-1">🎓</span> <strong class="text-slate-900">Research Focus:</strong> I am currently completing my thesis in Commercial Law focused on M&A transactions as corporate restructuring tools and a strategic lever for corporate turnaround.
+                        </p>
+                        
+                        <p class="bg-teal-50 p-4 rounded-lg border border-teal-100 text-teal-900 text-sm font-medium">
+                            <span class="unicode-icon mr-2">📩</span> I am always open to connecting with legal and corporate professionals. Contact me on LinkedIn or via email at: <a href="mailto:giumat.raso02@gmail.com" class="text-teal-700 hover:underline">giumat.raso02@gmail.com</a>.
+                        </p>
+                    </div>
+                </div>
+
                 <div class="flex flex-wrap gap-4 pt-2">
                     <a href="mailto:giumat.raso02@gmail.com" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 transition-colors">
-                        <span class="unicode-icon mr-2">📧</span> giumat.raso02@gmail.com
+                        <span class="unicode-icon mr-2">📧</span> Send Email
                     </a>
                     <a href="https://www.linkedin.com/in/giuseppe-mattia-raso-" target="_blank" class="inline-flex items-center px-4 py-2 border border-slate-300 text-sm font-medium rounded-md shadow-sm text-slate-700 bg-white hover:bg-slate-50 transition-colors">
                         <span class="unicode-icon mr-2">🔗</span> LinkedIn Profile
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_GqQrx_GDRzAGMFdrlVZWWEDy-3bU3Lj/view?usp=drive_link" target="_blank" class="inline-flex items-center px-4 py-2 border border-teal-500 text-sm font-bold rounded-md shadow-sm text-teal-700 bg-teal-50 hover:bg-teal-100 transition-colors">
+                        <span class="unicode-icon mr-2">📄</span> View Full CV
                     </a>
                     <span class="inline-flex items-center px-4 py-2 text-sm text-slate-600">
                         <span class="unicode-icon mr-2">📍</span> Lamezia Terme, Italy
@@ -91,176 +105,356 @@
                 </div>
             </div>
             
-            <!-- Quick KPI Dashboard -->
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
-                    <span class="text-3xl font-bold text-teal-600 mb-1">28/30</span>
-                    <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Academic GPA</span>
-                </div>
-                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
-                    <span class="text-3xl font-bold text-teal-600 mb-1">€120k</span>
-                    <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Budget Managed</span>
-                </div>
-                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
-                    <span class="text-3xl font-bold text-teal-600 mb-1">&gt;40%</span>
-                    <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Risk Reduction</span>
-                </div>
-                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
-                    <span class="text-3xl font-bold text-teal-600 mb-1">3</span>
-                    <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Countries of Study</span>
+            <!-- Dashboard Core Expertise (Side Column) -->
+            <div class="lg:col-span-4 flex flex-col justify-center">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 pl-1">Core Expertise</h3>
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4 transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                        <div class="bg-teal-50 p-3 rounded-lg text-teal-600 text-xl flex-shrink-0">
+                            <span class="unicode-icon">🤝</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">M&A & Corporate Law</h4>
+                            <p class="text-xs text-slate-500">Corporate Governance & Restructuring</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4 transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                        <div class="bg-green-50 p-3 rounded-lg text-green-600 text-xl flex-shrink-0">
+                            <span class="unicode-icon">🌱</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">ESG & Compliance</h4>
+                            <p class="text-xs text-slate-500">EU Taxonomy, CSRD & Risk Assessment</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4 transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                        <div class="bg-blue-50 p-3 rounded-lg text-blue-600 text-xl flex-shrink-0">
+                            <span class="unicode-icon">✍️</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Contract Management</h4>
+                            <p class="text-xs text-slate-500">Cross-border Drafting & Negotiation</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4 transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                        <div class="bg-purple-50 p-3 rounded-lg text-purple-600 text-xl flex-shrink-0">
+                            <span class="unicode-icon">🤖</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Legal Tech & AI</h4>
+                            <p class="text-xs text-slate-500">Process Optimization & AI Prompting</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 pb-24">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 pb-24">
 
-        <!-- Interactive Experience Section -->
+        <!-- Interactive Field Experience Section -->
         <section id="experience" class="scroll-mt-20">
             <div class="mb-8">
                 <h3 class="text-3xl font-bold text-slate-900 flex items-center">
-                    <span class="unicode-icon mr-3 text-teal-600">💼</span> Professional Experience
+                    <span class="unicode-icon mr-3 text-teal-600">💼</span> Field Experience
                 </h3>
                 <p class="mt-4 text-slate-600 max-w-3xl leading-relaxed">
-                    This section details my operational legal experience. Click on the strategic areas on the left to explore the specific responsibilities, achievements, and impact I delivered during my tenure as a Legal Department Associate.
+                    My professional track record, focusing on legal operations, contract management, and compliance within high-performance, multidisciplinary environments.
                 </p>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row min-h-[400px]">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                <div class="flex flex-col md:flex-row gap-6 items-start md:items-center mb-6 pb-6 border-b border-slate-100">
+                    <img src="https://www.unicalrepartocorse.it/wp-content/uploads/2020/11/Logo-Unical-Reparto-Corse-Colore.png" alt="Unical Reparto Corse Logo" class="h-20 w-auto object-contain bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-900">Unical Reparto Corse</h4>
+                        <p class="text-teal-600 font-bold text-lg mt-1">Legal Department Associate & Contract Specialist</p>
+                    </div>
+                </div>
+                
+                <div class="prose prose-slate max-w-none text-slate-600 text-base leading-relaxed">
+                    <p>
+                        As a Legal Associate, I managed the legal affairs and compliance of the Unical Reparto Corse team, operating in a multidisciplinary environment organized according to corporate logic. I was responsible for the legal protection of the project and the management of commercial contracts for the team's international activities in the Formula Student (Formula SAE) championship.
+                    </p>
+                    
+                    <p class="mt-6 font-bold text-slate-800 text-lg">Main activities and achievements:</p>
+                    
+                    <ul class="space-y-4 mt-4 list-none pl-0">
+                        <li class="flex items-start">
+                            <span class="mr-3 text-lg">🔹</span>
+                            <span><strong>Contract Management:</strong> Drafting and negotiating sponsorship contracts (e.g., Baker Hughes S.r.l.), ensuring the protection of the team's interests and the consolidation of partnerships.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-lg">🔹</span>
+                            <span><strong>Corporate Governance:</strong> Defining the organizational structure of the entity and supporting internal governance to ensure compliance with current regulations.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-3 text-lg">🔹</span>
+                            <span><strong>Budgeting & Finance:</strong> Monitoring legal compliance for the management of a total budget of approximately €120,000, interfacing with the administrative and technical departments.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Academic Projects Section -->
+        <section id="projects" class="scroll-mt-20">
+            <div class="mb-8">
+                <h3 class="text-3xl font-bold text-slate-900 flex items-center">
+                    <span class="unicode-icon mr-3 text-teal-600">🎓 🏛️</span> Academic Projects & Simulations
+                </h3>
+                <p class="mt-4 text-slate-600 max-w-3xl leading-relaxed">
+                    Explore my most relevant simulation projects. Click on the items in the left column to read the full details of my ESG management of complex corporate entities and negotiation simulations.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row min-h-[500px] h-[70vh] max-h-[700px]">
                 <!-- Master List -->
                 <div class="w-full md:w-1/3 bg-slate-50 border-r border-slate-200 flex flex-col">
-                    <div class="p-6 border-b border-slate-200">
-                        <h4 class="font-bold text-slate-800 text-lg">Unical Reparto Corse</h4>
-                        <p class="text-sm text-slate-500 font-medium mt-1">Formula Student Team</p>
-                        <p class="text-xs text-teal-600 font-semibold mt-1">Oct 2024 - Oct 2025 | Rende (CS)</p>
+                    <div class="p-4 border-b border-slate-200 bg-slate-100">
+                        <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider"></h4>
                     </div>
                     <div class="flex-1 overflow-y-auto">
-                        <button onclick="updateExperience('contract')" id="btn-contract" class="exp-btn w-full text-left px-6 py-4 border-b border-slate-200 hover:bg-slate-100 focus:outline-none transition-colors bg-white border-l-4 border-teal-500">
-                            <span class="block font-semibold text-slate-800">Contract Management</span>
-                            <span class="block text-xs text-slate-500 mt-1">Sponsorships & IP</span>
+                        <button onclick="updateExperience('redbull')" id="btn-redbull" class="exp-btn w-full text-left px-6 py-5 border-b border-slate-200 hover:bg-slate-100 focus:outline-none transition-colors border-l-4 border-teal-500 bg-white">
+                            <span class="block font-semibold text-slate-800">🏎️ ESG & Compliance - Capstone Project 🌱</span>
+                            <span class="block text-xs text-slate-500 mt-1">Red Bull Racing (Simulation)</span>
                         </button>
-                        <button onclick="updateExperience('budget')" id="btn-budget" class="exp-btn w-full text-left px-6 py-4 border-b border-slate-200 hover:bg-slate-100 focus:outline-none transition-colors border-l-4 border-transparent">
-                            <span class="block font-semibold text-slate-800">Budget & Risk</span>
-                            <span class="block text-xs text-slate-500 mt-1">Risk Assessment & Mitigation</span>
-                        </button>
-                        <button onclick="updateExperience('compliance')" id="btn-compliance" class="exp-btn w-full text-left px-6 py-4 border-b border-slate-200 hover:bg-slate-100 focus:outline-none transition-colors border-l-4 border-transparent">
-                            <span class="block font-semibold text-slate-800">Compliance & GDPR</span>
-                            <span class="block text-xs text-slate-500 mt-1">Regulatory Frameworks</span>
-                        </button>
-                        <button onclick="updateExperience('governance')" id="btn-governance" class="exp-btn w-full text-left px-6 py-4 hover:bg-slate-100 focus:outline-none transition-colors border-l-4 border-transparent">
-                            <span class="block font-semibold text-slate-800">Corporate Governance</span>
-                            <span class="block text-xs text-slate-500 mt-1">Internal Operations</span>
+                        <button onclick="updateExperience('nnc')" id="btn-nnc" class="exp-btn w-full text-left px-6 py-5 hover:bg-slate-100 focus:outline-none transition-colors border-l-4 border-transparent">
+                            <span class="block font-semibold text-slate-800">⚖️ National Negotiation Competition 🏛️</span>
+                            <span class="block text-xs text-slate-500 mt-1">ELSA - Negotiation Simulation</span>
                         </button>
                     </div>
                 </div>
                 <!-- Detail View -->
-                <div class="w-full md:w-2/3 p-8 detail-scroll overflow-y-auto" id="experience-detail">
-                    <!-- Default Content (Contract) -->
-                    <div class="animate-fade-in">
-                        <div class="inline-flex items-center justify-center p-3 bg-teal-100 rounded-lg mb-4">
-                            <span class="unicode-icon text-2xl text-teal-700">🤝</span>
-                        </div>
-                        <h4 class="text-2xl font-bold text-slate-900 mb-4">Contract Management & Negotiation</h4>
-                        <p class="text-slate-600 leading-relaxed mb-4">
-                            Drafting, review, and negotiation of sponsorship and technical supply contracts, ensuring intellectual property (IP) protection and legal risk mitigation.
+                <div class="w-full md:w-2/3 p-8 detail-scroll overflow-y-auto bg-white" id="experience-detail">
+                    <!-- Content will be loaded dynamically via JS. Default is RedBull. -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Timeline -->
+        <section id="education" class="scroll-mt-20">
+            <div class="mb-8">
+                <h3 class="text-3xl font-bold text-slate-900 flex items-center">
+                    <span class="unicode-icon mr-3 text-teal-600">🌍</span> Education
+                </h3>
+                <p class="mt-4 text-slate-600 max-w-3xl leading-relaxed">
+                    My academic journey is characterized by strong international mobility and intensive programs focused on Corporate Law, Ethics, Compliance, and ESG.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- UNICAL -->
+                <div class="bg-white rounded-xl p-8 shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-teal-50 rounded-bl-full -mr-12 -mt-12 transition-transform group-hover:scale-110"></div>
+                    <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEL544Y_1cOyQ/company-logo_100_100/company-logo_100_100/0/1683709213622?e=1776297600&v=beta&t=GCaDofz7jM_XfTzofPFoXDAMe3LKNUrPv1M32i9tfV8" alt="University of Calabria Logo" class="h-12 w-auto mb-4 block relative z-10 rounded-full">
+                    <h4 class="font-bold text-slate-900 text-xl mb-1">University of Calabria (UNICAL)</h4>
+                    <p class="text-sm text-slate-700 font-bold mb-1">Single-Cycle Master's Degree in Law</p>
+                    <p class="text-sm text-teal-600 font-semibold mb-4">Sep 2021 – Dec 2026</p>
+                    <div class="text-sm text-slate-600 leading-relaxed space-y-3">
+                        <p>
+                            Highly interdisciplinary Master's degree program designed to train legal professionals with a solid economic and business background, capable of operating in the legal departments of large enterprises and global markets.
                         </p>
-                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                            <h5 class="text-sm font-bold text-slate-800 mb-2 uppercase tracking-wide">Key Highlight</h5>
-                            <p class="text-sm text-slate-700">Successfully managed agreements with Key Account <strong>Baker Hughes S.r.l.</strong></p>
+                        <p class="pt-2 border-t border-slate-100">
+                            <strong>Key Exams:</strong> Commercial Law, Antitrust, Economic Criminal Law (White Collar Crimes), Tax Law, Capital Markets, Financial Intermediaries, Financial Statement Analysis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Widener -->
+                <div class="bg-white rounded-xl p-8 shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-12 -mt-12 transition-transform group-hover:scale-110"></div>
+                    <img src="https://media.licdn.com/dms/image/v2/C4D0BAQELIkoYmGNBZw/company-logo_200_200/company-logo_200_200/0/1631323712104?e=1776297600&v=beta&t=dILwQzHRZNF4gKlW8_zmK9Rmpa6z8Vv0ML2NbpxCPS4" alt="Widener University Logo" class="h-12 w-auto mb-4 block relative z-10 rounded">
+                    <h4 class="font-bold text-slate-900 text-xl mb-1">Widener University Schools of Law</h4>
+                    <p class="text-sm text-slate-700 font-bold mb-1">American/U.S. Law/Legal Studies/</p>
+                    <p class="text-sm text-teal-600 font-semibold mb-4">Jun 2025 – Jul 2025</p>
+                    <div class="text-sm text-slate-600 leading-relaxed space-y-3">
+                        <p>Intensive program at Delaware Law School focused on U.S. <strong>Corporate Law</strong>, <strong>Compliance</strong>, and <strong>ESG</strong> criteria.</p>
+                        <p>🔹 <strong>Capstone Project (In-House Counsel - Red Bull Racing F1 Team):</strong> Developed a "Net Zero 2030" strategy (Scope 1, 2 & 3) and conducted a rigorous compliance analysis against the FIA Financial Regulations (Budget Cap).</p>
+                        <div>
+                            <strong>🔹 Key Areas of Study:</strong>
+                            <ul class="list-disc pl-5 mt-1 space-y-1">
+                                <li><strong>CSR & ESG:</strong> Explored legal and ethical criteria, analyzing how corporations align profit motives with stakeholder welfare, environmental protection, and societal value.</li>
+                                <li><strong>Corporate Accountability:</strong> Examined the tension between shareholder primacy and stakeholder capitalism, corporate criminal liability, and the scope of corporate rights.</li>
+                                <li><strong>Antitrust & IP Law:</strong> Analyzed U.S. antitrust regulations (M&A, market dominance) and the U.S. IP system.</li>
+                            </ul>
                         </div>
+                    </div>
+                </div>
+
+                <!-- UCPH -->
+                <div class="bg-white rounded-xl p-8 shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-red-50 rounded-bl-full -mr-12 -mt-12 transition-transform group-hover:scale-110"></div>
+                    <img src="https://media.licdn.com/dms/image/v2/C560BAQHDk5tCEnvMIw/company-logo_100_100/company-logo_100_100/0/1631310679588?e=1776297600&v=beta&t=-ZGWNYW4Ceu0VdnPaHz3vvPSSHrakglVoU59SBSinpo" alt="University of Copenhagen Logo" class="h-12 w-auto mb-4 block relative z-10 bg-white">
+                    <h4 class="font-bold text-slate-900 text-xl mb-1">Københavns Universitet - University of Copenhagen</h4>
+                    <p class="text-sm text-slate-700 font-bold mb-1"><strong>Corporate Law</strong>, <strong>Compliance</strong>, <strong>ESG</strong></p>
+                    <p class="text-sm text-teal-600 font-semibold mb-4">Aug 2023 – Aug 2023</p>
+                    <div class="text-sm text-slate-600 leading-relaxed space-y-3">
+                        <p>Intensive program focused on the intersection of M&A, ESG frameworks, and Sustainable Finance within the EU regulatory landscape.</p>
+                        <ul class="space-y-2">
+                            <li>🔹 <strong>Corporate & M&A Strategy:</strong> Analyzed cross-border M&A transactions, corporate restructuring, and employment law dynamics, with a specific focus on aligning deals with recent European legislation (CSRD and EU Taxonomy).</li>
+                            <li>🔹 <strong>Professional Engagement:</strong> Participated in high-level workshops at Tier-1 firms and global leaders, including Boston Consulting Group (BCG), Kromann Reumert, Gorrissen Federspiel, Pandora, GN Store Nord, and DSV.</li>
+                            <li>🔹 <strong>Moot Court (Climate Litigation):</strong> Drafted defense briefs for the landmark Milieudefensie v. Royal Dutch Shell case. Focused on environmental due diligence, corporate liability, and the legal implications of the green agenda for multinational corporations.</li>
+                        </ul>
+                        <p class="pt-2 border-t border-slate-100"><strong>Key Focus:</strong> Sustainable financing, corporate compliance, and the evolving role of in-house legal departments in driving the transition to sustainable business models.</p>
+                    </div>
+                </div>
+
+                <!-- Deloitte & ELSA -->
+                <div class="bg-white rounded-xl p-8 shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group h-full flex flex-col justify-start">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-12 -mt-12 transition-transform group-hover:scale-110"></div>
+                    <span class="unicode-icon text-3xl mb-4 block">🌱 🌍</span>
+                    <h4 class="font-bold text-slate-900 text-xl mb-1">ELSA & Deloitte Academy</h4>
+                    <p class="text-sm text-slate-700 font-bold mb-1">ESG Specialist Program</p>
+                    <p class="text-sm text-teal-600 font-semibold mb-4">May 2024</p>
+                    <div class="text-sm text-slate-600 leading-relaxed space-y-3">
+                        <p>
+                            Participating in the ELSA Academy offered me the opportunity to explore these dimensions through seven well-structured courses, led by industry experts working at Deloitte Legal. The course modules were as follows:
+                        </p>
+                        <ul class="list-disc pl-5 mt-1 space-y-1">
+                            <li><strong>ESG Introduction.</strong> Understand the basics of ESG and its importance in the current business environment.</li>
+                            <li><strong>ESG Supply Chain.</strong> Analyze how sustainable supply chains contribute to global ESG goals.</li>
+                            <li><strong>ESG Employment Law.</strong> Examine the social implications of labor practices and legal frameworks.</li>
+                            <li><strong>ESG M&A.</strong> Exploring the role of ESG considerations in strategic corporate transactions.</li>
+                            <li><strong>ESG Banking and Finance.</strong> Understanding how the financial sector integrates ESG principles.</li>
+                            <li><strong>ESG Corporate Law.</strong> Investigate the legal aspects of corporate governance and ethical practices.</li>
+                            <li><strong>ESG Regulatory Law.</strong> Understand the regulatory environment and compliance in the ESG context.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Education & Certifications Timeline -->
-        <section id="education" class="scroll-mt-20">
-            <div class="mb-8">
-                <h3 class="text-3xl font-bold text-slate-900 flex items-center">
-                    <span class="unicode-icon mr-3 text-teal-600">🌍</span> Global Education & Certifications
+        <!-- Modern Skills Section (Tags/Badges layout without subjective charts) -->
+        <section id="skills" class="scroll-mt-20">
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <h3 class="text-3xl font-bold text-slate-900 flex items-center justify-center">
+                    <span class="unicode-icon mr-3 text-teal-600">🎯</span> Core Competencies
                 </h3>
-                <p class="mt-4 text-slate-600 max-w-3xl leading-relaxed">
-                    My academic journey spans multiple countries, focusing on the intersection of corporate law, ethics, and sustainability. This section outlines my formal education and specialized certifications.
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    A comprehensive overview of my professional skillset, spanning legal foundations, interpersonal capabilities, and modern operational tools.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- UNICAL -->
-                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-teal-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
-                    <span class="unicode-icon text-3xl mb-4 block">🏛️</span>
-                    <h4 class="font-bold text-slate-900 text-lg mb-1">University of Calabria</h4>
-                    <p class="text-sm text-teal-600 font-semibold mb-3">Expected: Dec 2026 | Italy</p>
-                    <p class="text-sm text-slate-700 font-medium mb-2">Master's Degree in Law (GPA: 28/30)</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        <strong>Thesis:</strong> "M&A transactions as corporate restructuring tools".<br><br>
-                        <strong>Key Exams:</strong> Commercial Law, Antitrust, White Collar Crimes, Capital Markets, Financial Statement Analysis.
-                    </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Hard Skills -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
+                        <span class="unicode-icon mr-3 text-2xl">⚖️</span> Hard Skills
+                    </h4>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Contract Drafting & Negotiation</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">M&A Strategy</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Due Diligence</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Corporate Governance</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Corporate Housekeeping</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Financial Statement Analysis</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">GDPR Compliance</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">D. Lgs. 231/2001</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Legal Research</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Legal Project Management</span>
+                    </div>
                 </div>
 
-                <!-- Widener -->
-                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
-                    <span class="unicode-icon text-3xl mb-4 block">🇺🇸</span>
-                    <h4 class="font-bold text-slate-900 text-lg mb-1">Widener University</h4>
-                    <p class="text-sm text-teal-600 font-semibold mb-3">July 2025 | Delaware, USA</p>
-                    <p class="text-sm text-slate-700 font-medium mb-2">Summer Law School</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        <strong>Focus:</strong> Corporate Responsibility & Sustainable Business.<br><br>
-                        <strong>Capstone:</strong> Red Bull Racing F1 Team In-House Counsel simulation (Net Zero 2030, FIA Financial Regulations).
-                    </p>
+                <!-- Soft Skills -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
+                        <span class="unicode-icon mr-3 text-2xl">🧠</span> Soft Skills
+                    </h4>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Problem-solving</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Teamwork</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Cross-functional Communication</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Tech-Savviness / Digital Mindset</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Critical Thinking</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Time Management</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Learning Agility</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Stakeholder Management</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Accountability</span>
+                    </div>
                 </div>
 
-                <!-- UCPH -->
-                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-red-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
-                    <span class="unicode-icon text-3xl mb-4 block">🇩🇰</span>
-                    <h4 class="font-bold text-slate-900 text-lg mb-1">University of Copenhagen</h4>
-                    <p class="text-sm text-teal-600 font-semibold mb-3">August 2023 | Denmark</p>
-                    <p class="text-sm text-slate-700 font-medium mb-2">Summer Law School</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        <strong>Focus:</strong> Corporate Law & Ethics, Cross-border M&A, ESG Due Diligence, EU Corporate Gov.<br><br>
-                        <strong>Workshop:</strong> Training at Tier-1 law firms (Kromann Reumert) and BCG.
-                    </p>
+                <!-- Legal Tech & IT Skills -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
+                        <span class="unicode-icon mr-3 text-2xl">🤖</span> Legal Tech & IT Skills
+                    </h4>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm font-bold text-slate-700 mb-2">AI Prompting & Automation</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">Gemini</span>
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">ChatGPT</span>
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">Copilot</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-700 mb-2">Data & Analysis Tools</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">Advanced MS Excel (Financial Analysis)</span>
+                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">MS Office Suite</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-700 mb-2">Legal Databases</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">DeJure</span>
+                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">OneLegale</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Deloitte -->
-                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-16 h-16 bg-green-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
-                    <span class="unicode-icon text-3xl mb-4 block">📜</span>
-                    <h4 class="font-bold text-slate-900 text-lg mb-1">ELSA & Deloitte Academy</h4>
-                    <p class="text-sm text-teal-600 font-semibold mb-3">May 2024 | Milan / Online</p>
-                    <p class="text-sm text-slate-700 font-medium mb-2">ESG Specialist Program</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Advanced certification on the integration of ESG criteria in extraordinary transactions (M&A), EU Taxonomy, and the CSRD Directive.
-                    </p>
+                <!-- Languages -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
+                        <span class="unicode-icon mr-3 text-2xl">🌍</span> Languages
+                    </h4>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h5 class="text-base font-bold text-slate-900">Italian</h5>
+                                <p class="text-sm text-slate-500">Native Proficiency</p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Native</span>
+                        </div>
+                        <div class="border-t border-slate-100 pt-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h5 class="text-base font-bold text-slate-900">English</h5>
+                                    <p class="text-sm text-slate-500">B2 Advanced - Legal & Business English</p>
+                                </div>
+                                <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">B2</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- Interactive Skills Analytics -->
-        <section id="skills" class="scroll-mt-20">
-            <div class="mb-8">
-                <h3 class="text-3xl font-bold text-slate-900 flex items-center">
-                    <span class="unicode-icon mr-3 text-teal-600">📊</span> Skills Analytics
-                </h3>
-                <p class="mt-4 text-slate-600 max-w-3xl leading-relaxed">
-                    A visual breakdown of my competencies. Use the interactive filters below to analyze my proficiency across legal hard skills, interpersonal soft skills, and modern Legal Tech capabilities.
-                </p>
-            </div>
-
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
-                <!-- Filters -->
-                <div class="flex flex-wrap gap-3 mb-8 justify-center">
-                    <button onclick="updateChart('All')" id="filter-All" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-slate-800 text-white transition-colors">All Skills</button>
-                    <button onclick="updateChart('Hard')" id="filter-Hard" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">Hard Skills</button>
-                    <button onclick="updateChart('Soft')" id="filter-Soft" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">Soft Skills</button>
-                    <button onclick="updateChart('Tech')" id="filter-Tech" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">Legal Tech & IT</button>
-                </div>
-
-                <!-- Chart Container -->
-                <div class="chart-container">
-                    <canvas id="skillsChart"></canvas>
+        <!-- CV Dedicated Section -->
+        <section id="resume" class="scroll-mt-20">
+            <div class="bg-teal-700 rounded-3xl shadow-lg border border-teal-600 p-8 md:p-12 text-center transform transition duration-300 hover:shadow-xl relative overflow-hidden">
+                <!-- Decorative background elements -->
+                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-teal-600 rounded-full opacity-50 blur-2xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-32 h-32 bg-teal-800 rounded-full opacity-50 blur-2xl pointer-events-none"></div>
+                
+                <div class="relative z-10">
+                    <span class="unicode-icon text-5xl mb-4 block">📄</span>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight">
+                        Looking for more details?
+                    </h3>
+                    <p class="text-teal-100 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                        Download or view my complete Curriculum Vitae to explore my full academic background, professional experiences, and certifications in depth.
+                    </p>
+                    <a href="https://drive.google.com/file/d/1_GqQrx_GDRzAGMFdrlVZWWEDy-3bU3Lj/view?usp=drive_link" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-xl text-teal-700 bg-white hover:bg-slate-50 shadow-md transition-all transform hover:-translate-y-1">
+                        <span class="unicode-icon mr-2 text-xl">⬇️</span> View / Download CV
+                    </a>
                 </div>
             </div>
         </section>
@@ -268,7 +462,7 @@
     </main>
 
     <footer class="bg-slate-900 py-8 text-center border-t border-slate-800">
-        <div class="max-w-6xl mx-auto px-4">
+        <div class="max-w-7xl mx-auto px-4">
             <p class="text-slate-400 text-sm mb-2">
                 &copy; <span id="year"></span> Giuseppe Mattia Raso.
             </p>
@@ -282,72 +476,94 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        /* --- EXPERIENCE SECTION LOGIC --- */
+        /* --- EXPERIENCE & PROJECTS SECTION LOGIC --- */
         const experienceData = {
-            'contract': `
+            'redbull': `
                 <div class="animate-fade-in">
-                    <div class="inline-flex items-center justify-center p-3 bg-teal-100 rounded-lg mb-4">
-                        <span class="unicode-icon text-2xl text-teal-700">🤝</span>
+                    <div class="flex items-center gap-4 mb-6 pb-4 border-b border-slate-100">
+                        <div class="inline-flex items-center justify-center p-3 bg-blue-100 rounded-lg">
+                            <span class="unicode-icon text-2xl text-blue-700">🏎️</span>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-slate-900">ESG Simulation: In-House Counsel for Red Bull Racing</h4>
+                            <p class="text-teal-600 font-semibold text-sm">Academic Simulation / Capstone Project</p>
+                        </div>
                     </div>
-                    <h4 class="text-2xl font-bold text-slate-900 mb-4">Contract Management & Negotiation</h4>
-                    <p class="text-slate-600 leading-relaxed mb-4">
-                        Drafting, review, and negotiation of sponsorship and technical supply contracts, ensuring intellectual property (IP) protection and legal risk mitigation.
-                    </p>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                        <h5 class="text-sm font-bold text-slate-800 mb-2 uppercase tracking-wide">Key Highlight</h5>
-                        <p class="text-sm text-slate-700">Successfully managed agreements with Key Account <strong>Baker Hughes S.r.l.</strong></p>
+
+                    <div class="prose prose-slate max-w-none text-slate-600 text-sm leading-relaxed">
+                        <p>
+                            Strategic and legal analysis developed within the Summer Law School in <em>"Corporate Responsibility & Sustainable Business"</em> at Widener University Delaware Law School (USA). The project consists of a professional simulation in the role of In-House Counsel, aimed at analyzing the convergence between corporate law, compliance, and ESG criteria in a high-performance context.
+                        </p>
+                        <p class="font-bold text-slate-800 mt-4">Key points of the project include:</p>
+                        <ul class="space-y-3 mt-3">
+                            <li>🔹 <strong>Corporate Governance & Compliance:</strong> Analysis of the cross-border corporate structure between Red Bull GmbH (Austria) and Red Bull Racing Ltd (UK), with a specific focus on legal risk management and compliance with FIA Financial Regulations (Budget Cap).</li>
+                            <li>🔹 <strong>Environmental Strategy & Carbon Accounting:</strong> Quantitative estimation of the team's Carbon Footprint (Scope 1, 2 and 3) and definition of a roadmap to achieve Net Zero 2030 targets.</li>
+                            <li>🔹 <strong>Business Modeling (RB Fuel Lab):</strong> Development of a €600M Business Plan for the in-house production of "drop-in" sustainable fuels, with projected annual revenues estimated between 200 and 300 million euros by 2030.</li>
+                            <li>🔹 <strong>Governance Innovation:</strong> Proposal for the establishment of an independent Sports Integrity Committee and adoption of reporting frameworks based on GRI standards to increase transparency and brand value towards stakeholders.</li>
+                            <li>🔹 <strong>Social & Community Impact:</strong> Definition of strategies to increase diversity in STEM disciplines (target +30% women in technical roles) and local reforestation projects ("RB Forest") to offset residual emissions.</li>
+                        </ul>
+
+                        <div class="mt-8 mb-4">
+                            <a href="https://drive.google.com/file/d/1DaCeZTUOr3oA0dzEQ8lC5lu0l3AuBTZd/view?usp=drive_link" target="_blank" class="inline-flex items-center px-5 py-3 border border-transparent text-sm font-semibold rounded-xl shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-all transform hover:-translate-y-0.5">
+                                <span class="unicode-icon mr-2 text-lg">📑</span> View Full Capstone Project Work
+                            </a>
+                        </div>
+
+                        <div class="mt-6 bg-slate-100 p-4 rounded-lg text-xs italic text-slate-500 text-center">
+                            [This paper represents solely a university project and an academic simulation based on public data. The project is not affiliated with nor authorized by Red Bull Racing, Red Bull GmbH, or the FIA. The strategies and financial data contained are theoretical projections for study purposes and do not reflect the actual plans of the mentioned companies]
+                        </div>
                     </div>
                 </div>
             `,
-            'budget': `
+            'nnc': `
                 <div class="animate-fade-in">
-                    <div class="inline-flex items-center justify-center p-3 bg-blue-100 rounded-lg mb-4">
-                        <span class="unicode-icon text-2xl text-blue-700">📈</span>
+                    <div class="flex items-center gap-4 mb-6 pb-4 border-b border-slate-100">
+                        <div class="inline-flex items-center justify-center p-3 bg-indigo-100 rounded-lg">
+                            <span class="unicode-icon text-2xl text-indigo-700">⚖️</span>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-slate-900">National Negotiation Competition IX (NNC)</h4>
+                            <p class="text-teal-600 font-semibold text-sm">ELSA Italy</p>
+                        </div>
                     </div>
-                    <h4 class="text-2xl font-bold text-slate-900 mb-4">Budget & Risk Assessment</h4>
-                    <p class="text-slate-600 leading-relaxed mb-4">
-                        Legal management supporting a <strong>€120,000</strong> operational budget. Significant reduction in litigation risk exposure through the implementation of standardized proprietary contractual frameworks.
-                    </p>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                        <h5 class="text-sm font-bold text-slate-800 mb-2 uppercase tracking-wide">Quantifiable Impact</h5>
-                        <p class="text-sm text-slate-700">Achieved a <strong>>40% reduction</strong> in negotiation time and litigation risk exposure.</p>
-                    </div>
-                </div>
-            `,
-            'compliance': `
-                <div class="animate-fade-in">
-                    <div class="inline-flex items-center justify-center p-3 bg-indigo-100 rounded-lg mb-4">
-                        <span class="unicode-icon text-2xl text-indigo-700">🛡️</span>
-                    </div>
-                    <h4 class="text-2xl font-bold text-slate-900 mb-4">Compliance & GDPR</h4>
-                    <p class="text-slate-600 leading-relaxed mb-4">
-                        Supervision of compliance with EU Regulation 2016/679 (GDPR) and anti-corruption regulations (ABC Policy).
-                    </p>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                        <h5 class="text-sm font-bold text-slate-800 mb-2 uppercase tracking-wide">Strategic Action</h5>
-                        <p class="text-sm text-slate-700">Introduction of standardized <strong>"Compliance with Law"</strong> clauses within all third-party contracts.</p>
-                    </div>
-                </div>
-            `,
-            'governance': `
-                <div class="animate-fade-in">
-                    <div class="inline-flex items-center justify-center p-3 bg-purple-100 rounded-lg mb-4">
-                        <span class="unicode-icon text-2xl text-purple-700">🏢</span>
-                    </div>
-                    <h4 class="text-2xl font-bold text-slate-900 mb-4">Corporate Governance</h4>
-                    <p class="text-slate-600 leading-relaxed mb-4">
-                        Structuring internal operations and workflows to align with best practices in corporate administration.
-                    </p>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                        <h5 class="text-sm font-bold text-slate-800 mb-2 uppercase tracking-wide">Process Optimization</h5>
-                        <p class="text-sm text-slate-700">Drafting of internal operational guidelines to optimize the team's <strong>Corporate Housekeeping</strong> and decision-making processes.</p>
+
+                    <div class="prose prose-slate max-w-none text-slate-600 text-base leading-relaxed">
+                        <p>
+                            The Negotiation Competition (NNC) is an event periodically organized by ELSA and consists of the largest negotiation simulation in Italy.
+                        </p>
+                        <p class="font-bold text-slate-800 mt-4 mb-2">The activity I carried out concerned:</p>
+                        
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-100 mb-4">
+                            <strong class="text-slate-800 block mb-2">Intensive negotiation course structured as follows:</strong>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                                <div>• "Introduction to negotiation"</div>
+                                <div>• "Negotiation techniques"</div>
+                                <div>• "Drafting the negotiation plan (theory)"</div>
+                                <div>• "Negotiation simulation"</div>
+                                <div>• "Drafting the negotiation plan (practice)"</div>
+                            </div>
+                        </div>
+
+                        <p>
+                            <strong>Negotiation plan drafting phase:</strong> teams had to indicate their own interests and objectives, those of the counterpart, negotiation strategies, and the best/worst possible alternative based on "general information" and "confidential information".
+                        </p>
+
+                        <div class="mt-8 mb-4">
+                            <a href="https://drive.google.com/file/d/1EPcsv6NMID0t-0ThQTPdkpLVTY9Qaqbt/view?usp=drive_link" target="_blank" class="inline-flex items-center px-5 py-3 border border-transparent text-sm font-semibold rounded-xl shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-all transform hover:-translate-y-0.5">
+                                <span class="unicode-icon mr-2 text-lg">📑</span> View Negotiation Plan
+                            </a>
+                        </div>
+                        
+                        <div class="mt-4 p-3 border-l-4 border-indigo-300 bg-indigo-50 text-sm italic text-slate-700">
+                            The negotiation plan, including paragraph titles, had to be drafted in A4 format, Garamond font, size 12, with 1.5 line spacing and 2.54 cm margins on all sides. Furthermore, the use of footnotes was not permitted, and it could not exceed a maximum of 2 pages.
+                        </div>
                     </div>
                 </div>
             `
         };
 
         function updateExperience(id) {
-            // Update content
+            // Update the content
             document.getElementById('experience-detail').innerHTML = experienceData[id];
             
             // Update button styles
@@ -356,154 +572,32 @@
                 btn.classList.add('border-transparent');
             });
             const activeBtn = document.getElementById(`btn-${id}`);
-            activeBtn.classList.remove('border-transparent');
-            activeBtn.classList.add('bg-white', 'border-teal-500');
+            if(activeBtn) {
+                activeBtn.classList.remove('border-transparent');
+                activeBtn.classList.add('bg-white', 'border-teal-500');
+            }
         }
 
-
-        /* --- SKILLS CHART LOGIC --- */
-        const rawSkillsData = [
-            { name: "M&A Strategy", category: "Hard", value: 95 },
-            { name: "Contract Drafting", category: "Hard", value: 90 },
-            { name: "Corporate Gov.", category: "Hard", value: 85 },
-            { name: "GDPR Compliance", category: "Hard", value: 85 },
-            { name: "Due Diligence", category: "Hard", value: 80 },
-            { name: "Fin. Statement Analysis", category: "Hard", value: 75 },
-            { name: "Problem-solving", category: "Soft", value: 95 },
-            { name: "Critical Thinking", category: "Soft", value: 90 },
-            { name: "Teamwork", category: "Soft", value: 90 },
-            { name: "Stakeholder Mgmt", category: "Soft", value: 85 },
-            { name: "AI Drafting (Gemini/ChatGPT)", category: "Tech", value: 95 },
-            { name: "Legal Databases (DeJure)", category: "Tech", value: 90 },
-            { name: "Advanced Excel", category: "Tech", value: 85 }
-        ];
-
-        let skillsChartInstance = null;
-
-        function renderChart(filterCategory) {
-            const ctx = document.getElementById('skillsChart').getContext('2d');
-            
-            // Filter Data
-            const filteredData = filterCategory === 'All' 
-                ? rawSkillsData 
-                : rawSkillsData.filter(s => s.category === filterCategory);
-
-            // Sort by value descending
-            filteredData.sort((a, b) => b.value - a.value);
-
-            const labels = filteredData.map(d => d.name);
-            const data = filteredData.map(d => d.value);
-            
-            // Assign colors based on category
-            const backgroundColors = filteredData.map(d => {
-                if(d.category === 'Hard') return 'rgba(13, 148, 136, 0.7)'; // Teal
-                if(d.category === 'Soft') return 'rgba(59, 130, 246, 0.7)'; // Blue
-                return 'rgba(139, 92, 246, 0.7)'; // Purple for Tech
-            });
-
-            const borderColors = filteredData.map(d => {
-                if(d.category === 'Hard') return 'rgba(13, 148, 136, 1)';
-                if(d.category === 'Soft') return 'rgba(59, 130, 246, 1)';
-                return 'rgba(139, 92, 246, 1)';
-            });
-
-            if (skillsChartInstance) {
-                skillsChartInstance.destroy();
-            }
-
-            skillsChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Proficiency Level (Estimated)',
-                        data: data,
-                        backgroundColor: backgroundColors,
-                        borderColor: borderColors,
-                        borderWidth: 1,
-                        borderRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y', // Horizontal bar chart
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                            titleFont: { size: 14, family: 'sans-serif' },
-                            bodyFont: { size: 13, family: 'sans-serif' },
-                            padding: 10,
-                            displayColors: false,
-                            callbacks: {
-                                label: function(context) {
-                                    return `Proficiency: ${context.raw}/100`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                            grid: { color: 'rgba(226, 232, 240, 0.5)' },
-                            ticks: { display: false } // Hide numbers to keep it clean
-                        },
-                        y: {
-                            grid: { display: false },
-                            ticks: {
-                                font: { size: 12, family: 'sans-serif', weight: '500' },
-                                color: '#334155',
-                                // Label wrapping logic (16 chars approx)
-                                callback: function(value, index, values) {
-                                    const label = this.getLabelForValue(value);
-                                    if (label.length > 18) {
-                                        return label.substring(0, 18) + '...';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 800,
-                        easing: 'easeOutQuart'
-                    }
-                }
-            });
-        }
-
-        function updateChart(category) {
-            // Update button styles
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('bg-slate-800', 'text-white');
-                btn.classList.add('bg-slate-100', 'text-slate-700');
-            });
-            const activeBtn = document.getElementById(`filter-${category}`);
-            activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
-            activeBtn.classList.add('bg-slate-800', 'text-white');
-
-            renderChart(category);
-        }
-
-        // Add minimal CSS for animations
-        const style = document.createElement('style');
-        style.textContent = `
-            .animate-fade-in {
-                animation: fadeIn 0.4s ease-in forwards;
-            }
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(5px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize chart on load
+        // Initialize view
         window.addEventListener('DOMContentLoaded', () => {
-            renderChart('All');
+            updateExperience('redbull'); 
         });
+
+        // Add dynamic CSS for animations
+        if(!document.getElementById('dynamic-styles')) {
+            const style = document.createElement('style');
+            style.id = 'dynamic-styles';
+            style.textContent = `
+                .animate-fade-in {
+                    animation: fadeIn 0.4s ease-in forwards;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(5px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
 
     </script>
 </body>
