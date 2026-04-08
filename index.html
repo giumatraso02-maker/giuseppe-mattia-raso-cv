@@ -5,13 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Portfolio | Giuseppe Mattia Raso</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Chosen Palette: Corporate Slate & Teal (Professional, Trustworthy, Modern) -->
-    <!-- Application Structure Plan: The SPA is designed as an interactive professional dashboard rather than a static document. The Hero section is expanded to accommodate "Information", "International Vision & ESG", and "Research Focus". The Experience section is transformed into "Experience & Projects" to include, via the master-detail layout, the Unical experience, the Red Bull simulation, and the National Negotiation Competition, allowing clean exploration of rich texts. Education adopts a two-column grid to accommodate longer descriptions without vertically overloading the view. Skills section uses a clean, modern Badge/Tag grid layout to present keywords without subjective numerical evaluations. -->
-    <!-- Visualization & Content Choices: 1. Information/Hero -> Goal: Inform -> Viz: Structured text blocks + KPIs -> Interaction: Linear reading -> Justification: Immediately provides context and vision. 2. Experience & Projects -> Goal: Explore -> Viz: Interactive Master-Detail Layout -> Interaction: Click on role list to update detail pane -> Justification: Keeps the interface clean while offering specific deep dives into robust simulations (e.g. Red Bull). 3. Education -> Goal: Organize -> Viz: Flexible Cards -> Interaction: Hover effects -> Justification: Clearly shows the global path. 4. Skills -> Goal: Categorize -> Viz: Skill Badges / Tags -> Interaction: Hover highlights -> Justification: Recruiter-friendly keyword layout that avoids subjective self-grading (like charts) while remaining highly scannable and ATS-like. -->
+    <!-- Application Structure Plan: The SPA is designed as an interactive professional dashboard rather than a static document. The Hero section is expanded to accommodate "Information", "International Vision & ESG", and "Research Focus". The Experience section is transformed into "Relevant Projects" to include, via the master-detail layout, the CLM Pactum, the Red Bull simulation, and the National Negotiation Competition, allowing clean exploration of rich texts. Education adopts a two-column grid to accommodate longer descriptions without vertically overloading the view. Skills section uses horizontal bar charts. -->
+    <!-- Visualization & Content Choices: 1. Information/Hero -> Goal: Inform -> Viz: Structured text blocks + KPIs -> Interaction: Linear reading -> Justification: Immediately provides context and vision. 2. Relevant Projects -> Goal: Explore -> Viz: Interactive Master-Detail Layout -> Interaction: Click on role list to update detail pane -> Justification: Keeps the interface clean while offering specific deep dives into robust simulations. 3. Education -> Goal: Organize -> Viz: Flexible Cards -> Interaction: Hover effects -> Justification: Clearly shows the global path. 4. Skills -> Goal: Categorize & Compare -> Viz: Horizontal Bar Charts (Chart.js) in a Grid -> Interaction: Hover tooltips -> Justification: Visually dissects and highlights proficiency across distinct domains (Hard, Soft, Tech, Languages) providing targeted, granular insights on a 1-10 scale. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <style>
+        .chart-container-small {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            height: 380px; /* Adattato per le barre */
+        }
+        @media (min-width: 768px) {
+            .chart-container-small {
+                height: 420px; /* Adattato per i monitor grandi */
+            }
+        }
         .unicode-icon {
             font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
         }
@@ -40,10 +52,10 @@
                 <div class="flex-shrink-0 flex items-center font-bold text-xl tracking-tight text-slate-900">
                     <span class="unicode-icon mr-2 text-2xl">⚖️</span> GMR Legal 📈
                 </div>
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
                     <a href="#profile" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Profile</a>
                     <a href="#experience" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Experience</a>
-                    <a href="#projects" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Academic Projects</a>
+                    <a href="#projects" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Projects</a>
                     <a href="#education" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Education</a>
                     <a href="#skills" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Skills</a>
                     <a href="https://drive.google.com/file/d/1_GqQrx_GDRzAGMFdrlVZWWEDy-3bU3Lj/view?usp=drive_link" target="_blank" class="text-sm font-bold text-teal-600 hover:text-teal-700 transition-colors flex items-center bg-teal-50 px-3 py-1.5 rounded-md border border-teal-100"><span class="mr-1">📄</span> CV</a>
@@ -200,11 +212,11 @@
             </div>
         </section>
 
-        <!-- Interactive Academic Projects Section -->
+        <!-- Interactive Relevant Projects Section -->
         <section id="projects" class="scroll-mt-20">
             <div class="mb-8">
                 <h3 class="text-3xl font-bold text-slate-900 flex items-center">
-                    <span class="unicode-icon mr-3 text-teal-600">🎓 🏛️</span> Academic Projects & Simulations
+                    <span class="unicode-icon mr-3 text-teal-600">🎓 🏛️</span> Relevant Projects
                 </h3>
                 <p class="mt-4 text-slate-600 max-w-3xl leading-relaxed">
                     Explore my most relevant simulation projects. Click on the items in the left column to read the full details of my ESG management of complex corporate entities and negotiation simulations.
@@ -215,10 +227,14 @@
                 <!-- Master List -->
                 <div class="w-full md:w-1/3 bg-slate-50 border-r border-slate-200 flex flex-col">
                     <div class="p-4 border-b border-slate-200 bg-slate-100">
-                        <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider"></h4>
+                        <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Projects & Simulations</h4>
                     </div>
                     <div class="flex-1 overflow-y-auto">
-                        <button onclick="updateExperience('redbull')" id="btn-redbull" class="exp-btn w-full text-left px-6 py-5 border-b border-slate-200 hover:bg-slate-100 focus:outline-none transition-colors border-l-4 border-teal-500 bg-white">
+                        <button onclick="updateExperience('clmpactum')" id="btn-clmpactum" class="exp-btn w-full text-left px-6 py-5 border-b border-slate-200 hover:bg-slate-100 focus:outline-none transition-colors border-l-4 border-teal-500 bg-white">
+                            <span class="block font-semibold text-slate-800">💻 CLM Pactum</span>
+                            <span class="block text-xs text-slate-500 mt-1">Contract Lifecycle Management</span>
+                        </button>
+                        <button onclick="updateExperience('redbull')" id="btn-redbull" class="exp-btn w-full text-left px-6 py-5 border-b border-slate-200 hover:bg-slate-100 focus:outline-none transition-colors border-l-4 border-transparent">
                             <span class="block font-semibold text-slate-800">🏎️ ESG & Compliance - Capstone Project 🌱</span>
                             <span class="block text-xs text-slate-500 mt-1">Red Bull Racing (Simulation)</span>
                         </button>
@@ -230,7 +246,7 @@
                 </div>
                 <!-- Detail View -->
                 <div class="w-full md:w-2/3 p-8 detail-scroll overflow-y-auto bg-white" id="experience-detail">
-                    <!-- Content will be loaded dynamically via JS. Default is RedBull. -->
+                    <!-- Content will be loaded dynamically via JS. Default is CLM Pactum. -->
                 </div>
             </div>
         </section>
@@ -328,109 +344,58 @@
             </div>
         </section>
 
-        <!-- Modern Skills Section (Tags/Badges layout without subjective charts) -->
+        <!-- Interactive Skills Dashboard (Multiple Bar Charts) -->
         <section id="skills" class="scroll-mt-20">
             <div class="mb-10 text-center max-w-3xl mx-auto">
                 <h3 class="text-3xl font-bold text-slate-900 flex items-center justify-center">
-                    <span class="unicode-icon mr-3 text-teal-600">🎯</span> Core Competencies
+                    <span class="unicode-icon mr-3 text-teal-600">📊</span> Core Skills Dashboard
                 </h3>
                 <p class="mt-4 text-slate-600 leading-relaxed">
-                    A comprehensive overview of my professional skillset, spanning legal foundations, interpersonal capabilities, and modern operational tools.
+                    A granular breakdown of my core competencies categorized into distinct operational domains. Hover over the bars for detailed proficiency scores (Scale 1-10).
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Dashboard Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 
                 <!-- Hard Skills -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
-                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
-                        <span class="unicode-icon mr-3 text-2xl">⚖️</span> Hard Skills
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-2 flex items-center justify-center">
+                        <span class="unicode-icon mr-2">⚖️</span> Hard Skills
                     </h4>
-                    <div class="flex flex-wrap gap-2.5">
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Contract Drafting & Negotiation</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">M&A Strategy</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Due Diligence</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Corporate Governance</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Corporate Housekeeping</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Financial Statement Analysis</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">GDPR Compliance</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">D. Lgs. 231/2001</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Legal Research</span>
-                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Legal Project Management</span>
+                    <div class="chart-container-small">
+                        <canvas id="hardSkillsChart"></canvas>
                     </div>
                 </div>
 
                 <!-- Soft Skills -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
-                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
-                        <span class="unicode-icon mr-3 text-2xl">🧠</span> Soft Skills
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-2 flex items-center justify-center">
+                        <span class="unicode-icon mr-2">🧠</span> Soft Skills
                     </h4>
-                    <div class="flex flex-wrap gap-2.5">
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Problem-solving</span>
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Teamwork</span>
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Cross-functional Communication</span>
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Tech-Savviness / Digital Mindset</span>
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Critical Thinking</span>
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Time Management</span>
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Learning Agility</span>
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Stakeholder Management</span>
-                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Accountability</span>
+                    <div class="chart-container-small">
+                        <canvas id="softSkillsChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Legal Tech & IT Skills -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
-                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
-                        <span class="unicode-icon mr-3 text-2xl">🤖</span> Legal Tech & IT Skills
+                <!-- Legal Tech & AI -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-2 flex items-center justify-center">
+                        <span class="unicode-icon mr-2">🤖</span> Legal Tech & AI / IT
                     </h4>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-sm font-bold text-slate-700 mb-2">AI Prompting & Automation</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">Gemini</span>
-                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">ChatGPT</span>
-                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">Copilot</span>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold text-slate-700 mb-2">Data & Analysis Tools</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">Advanced MS Excel (Financial Analysis)</span>
-                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">MS Office Suite</span>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold text-slate-700 mb-2">Legal Databases</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">DeJure</span>
-                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">OneLegale</span>
-                            </div>
-                        </div>
+                    <div class="chart-container-small">
+                        <canvas id="techSkillsChart"></canvas>
                     </div>
                 </div>
 
                 <!-- Languages -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
-                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
-                        <span class="unicode-icon mr-3 text-2xl">🌍</span> Languages
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-2 flex items-center justify-center">
+                        <span class="unicode-icon mr-2">🌍</span> Languages
                     </h4>
-                    <div class="space-y-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h5 class="text-base font-bold text-slate-900">Italian</h5>
-                                <p class="text-sm text-slate-500">Native Proficiency</p>
-                            </div>
-                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Native</span>
-                        </div>
-                        <div class="border-t border-slate-100 pt-4">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h5 class="text-base font-bold text-slate-900">English</h5>
-                                    <p class="text-sm text-slate-500">B2 Advanced - Legal & Business English</p>
-                                </div>
-                                <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">B2</span>
-                            </div>
-                        </div>
+                    <p class="text-center text-xs text-slate-500 mb-2">English: B2 Advanced (Legal & Business) | Italian: Native</p>
+                    <div class="chart-container-small">
+                        <canvas id="languagesChart"></canvas>
                     </div>
                 </div>
 
@@ -478,6 +443,42 @@
 
         /* --- EXPERIENCE & PROJECTS SECTION LOGIC --- */
         const experienceData = {
+            'clmpactum': `
+                <div class="animate-fade-in">
+                    <div class="flex items-center gap-4 mb-6 pb-4 border-b border-slate-100">
+                        <div class="inline-flex items-center justify-center p-2 bg-slate-50 rounded-lg border border-slate-200">
+                            <!-- Logo caricato tramite direct link ottimizzato Google Drive -->
+                            <img src="https://lh3.googleusercontent.com/d/1xGKxbFCApRtlj4zO08Sfy4LVLmfjXAZK" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f8fafc/0f766e?text=CLM';" alt="CLM Pactum Logo" class="h-14 w-auto object-contain rounded">
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-slate-900">CLM Pactum – Contract Lifecycle Management Solution</h4>
+                            <p class="text-teal-600 font-semibold text-sm">Legal Tech, Corporate Governance & Compliance</p>
+                        </div>
+                    </div>
+
+                    <div class="prose prose-slate max-w-none text-slate-600 text-sm leading-relaxed">
+                        <h5 class="text-lg font-bold text-slate-800 mb-2">1. Executive Summary</h5>
+                        <p>
+                            End-to-end design and development of a proprietary Contract Lifecycle Management (CLM) platform dedicated to optimizing B2B negotiation workflows. The system stems from the need to overcome the fragmentation of drafting and negotiation processes encountered during the management of sponsorship contracts.
+                        </p>
+                        
+                        <h5 class="text-lg font-bold text-slate-800 mt-6 mb-3">2. Core Structure and Functionalities</h5>
+                        <ul class="space-y-4">
+                            <li>🔹 <strong>Management Pipeline & Workflow Orchestration:</strong> The system is structured around a contract management pipeline that enables the initialization and centralized monitoring of various negotiation cycles. Each contract instance acts as an operational hub for managing the document body (recitals, articles, and clauses) and allows real-time workflow monitoring through dynamic status indicators (e.g., "Sent", "Signature in progress").</li>
+                            <li>🔹 <strong>Collaborative Ecosystem & Direct Communication Channel:</strong> To overcome the information dispersion typical of email threads, the software integrates a dedicated chat for each contractual position. This direct communication channel between Legal Ops and the counterpart ensures centralized feedback and traceability of discussions throughout the negotiation phase, ensuring the highest standards of transparency.</li>
+                            <li>🔹 <strong>Self-Service Portal & Stakeholder Onboarding:</strong> The operational "heart" of the system lies in generating a unique and encrypted URL for each negotiation. Through this portal, the counterpart performs autonomous onboarding by entering their corporate registry data (company name, registered office, legal representative, VAT/Tax ID) in a guided and secure manner.</li>
+                            <li>🔹 <strong>Dynamic Drafting & Negotiation Flexibility:</strong> Although the system initially populates the contract based on a Smart Playbook of standardized clauses loaded in the Library, it guarantees total operational flexibility. Legal Ops has the authority to intervene directly to modify the contract body ad hoc for each specific negotiation cycle. This customization capability is available both in the preliminary phase before sending the URL and iteratively following negotiations, ensuring the final document faithfully reflects the agreed-upon arrangement of interests.</li>
+                            <li>🔹 <strong>Monitoring, Reporting & Intelligence:</strong> Beyond the operational phase, CLM Pactum offers advanced governance tools:
+                                <ul class="list-disc pl-5 mt-2 space-y-1">
+                                    <li><em>Alert system & schedule:</em> Automatic notification module for monitoring deadlines and contract renewals.</li>
+                                    <li><em>Modular library:</em> Centralized repository for standardizing legal content (Smart Playbook) with management of unfair clauses and compliance frameworks.</li>
+                                    <li><em>Reporting & Analytics:</em> Dedicated dashboard for analyzing negotiation performance, tracking Total Contract Value (TCV), Cycle Time (average closing time), and the distribution of the most performing sponsorship tiers.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            `,
             'redbull': `
                 <div class="animate-fade-in">
                     <div class="flex items-center gap-4 mb-6 pb-4 border-b border-slate-100">
@@ -578,9 +579,164 @@
             }
         }
 
-        // Initialize view
+        /* --- MULTIPLE SKILLS CHARTS LOGIC (HORIZONTAL BARS) --- */
+        
+        // Reusable function to create horizontal bar charts
+        function createBarChart(canvasId, labels, dataSetsConfig) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            // Format datasets
+            const datasets = dataSetsConfig.map(ds => ({
+                label: ds.label,
+                data: ds.data,
+                backgroundColor: ds.bgColor,
+                borderColor: ds.borderColor,
+                borderWidth: 1,
+                borderRadius: 4
+            }));
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // Rende il grafico orizzontale
+                    scales: {
+                        x: {
+                            min: 0,
+                            max: 10, // Scala impostata a 10
+                            ticks: {
+                                stepSize: 1,
+                                font: { size: 11, family: 'sans-serif' }
+                            },
+                            grid: { color: 'rgba(226, 232, 240, 0.4)' }
+                        },
+                        y: {
+                            ticks: {
+                                font: { size: 11, family: 'sans-serif', weight: '600' },
+                                color: '#475569',
+                                autoSkip: false // Assicura che si vedano tutte le etichette
+                            },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { 
+                            display: datasets.length > 1, 
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                boxWidth: 8,
+                                font: { size: 12 }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                            titleFont: { size: 13, family: 'sans-serif' },
+                            bodyFont: { size: 12, family: 'sans-serif' },
+                            padding: 10,
+                            callbacks: {
+                                title: function(context) {
+                                    let labelArr = context[0].label;
+                                    return Array.isArray(labelArr) ? labelArr.join(' ') : labelArr;
+                                },
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}/10`;
+                                }
+                            }
+                        }
+                    },
+                    animation: { duration: 1000, easing: 'easeOutQuart' }
+                }
+            });
+        }
+
+        // Initialize charts when the DOM is loaded
         window.addEventListener('DOMContentLoaded', () => {
-            updateExperience('redbull'); 
+            
+            // 1. Hard Skills Chart (Teal)
+            createBarChart('hardSkillsChart', 
+                [
+                    ['Contract Drafting', '& Negotiation'], 
+                    'Due Diligence', 
+                    'M&A Strategy', 
+                    'Corporate Gov.', 
+                    'Corp. Housekeeping', 
+                    ['Financial Statement', 'Analysis'], 
+                    'GDPR Compliance', 
+                    'D.Lgs. 231/2001', 
+                    'Legal Research', 
+                    'Project Mgmt.'
+                ],
+                [{
+                    label: 'Proficiency',
+                    data: [8, 9, 9, 9, 9, 7, 8, 8, 7, 7], // Valori su base 10
+                    bgColor: 'rgba(13, 148, 136, 0.85)', // Colore più solido per le barre
+                    borderColor: 'rgba(13, 148, 136, 1)'
+                }]
+            );
+
+            // 2. Soft Skills Chart (Blue)
+            createBarChart('softSkillsChart', 
+                [
+                    ['Cross-functional', 'Communication'], 
+                    'Teamwork', 
+                    'Problem-solving', 
+                    'Critical Thinking', 
+                    'Time Management', 
+                    'Stakeholder Mgmt.', 
+                    'Accountability', 
+                    'Learning Agility', 
+                    ['Tech-Savviness /', 'Digital Mindset']
+                ],
+                [{
+                    label: 'Proficiency',
+                    data: [8, 9, 9, 8, 8, 7, 7, 8, 9], // Valori su base 10
+                    bgColor: 'rgba(59, 130, 246, 0.85)',
+                    borderColor: 'rgba(59, 130, 246, 1)'
+                }]
+            );
+
+            // 3. Legal Tech & IT Chart (Purple)
+            createBarChart('techSkillsChart', 
+                [
+                    ['AI Prompting', '(Gemini, ChatGPT, Copilot)'], 
+                    ['Advanced MS Office', '(Excel for Finance)'], 
+                    ['Legal Databases', '(DeJure, OneLegale)']
+                ],
+                [{
+                    label: 'Proficiency',
+                    data: [9, 9, 8], // Valori su base 10
+                    bgColor: 'rgba(139, 92, 246, 0.85)',
+                    borderColor: 'rgba(139, 92, 246, 1)'
+                }]
+            );
+
+            // 4. Languages Chart (Green for Italian, Amber for English)
+            createBarChart('languagesChart', 
+                ['Listening', 'Speaking', 'Reading', 'Writing'],
+                [
+                    {
+                        label: 'Italian (Native)',
+                        data: [10, 10, 10, 10], // Base 10
+                        bgColor: 'rgba(16, 185, 129, 0.85)',
+                        borderColor: 'rgba(16, 185, 129, 1)'
+                    },
+                    {
+                        label: 'English (B2 Advanced)',
+                        data: [8, 8, 9, 7], // Ascolto 8, Parlato 8, Lettura 9, Scrittura 7
+                        bgColor: 'rgba(245, 158, 11, 0.85)',
+                        borderColor: 'rgba(245, 158, 11, 1)'
+                    }
+                ]
+            );
+
+            // Load default experience detail
+            updateExperience('clmpactum'); 
         });
 
         // Add dynamic CSS for animations
