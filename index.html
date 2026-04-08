@@ -5,25 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Portfolio | Giuseppe Mattia Raso</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Chosen Palette: Corporate Slate & Teal (Professional, Trustworthy, Modern) -->
-    <!-- Application Structure Plan: The SPA is designed as an interactive professional dashboard rather than a static document. The Hero section is expanded to accommodate "Information", "International Vision & ESG", and "Research Focus". The Experience section is transformed into "Relevant Projects" to include, via the master-detail layout, the CLM Pactum, the Red Bull simulation, and the National Negotiation Competition, allowing clean exploration of rich texts. Education adopts a two-column grid to accommodate longer descriptions without vertically overloading the view. Skills section uses horizontal bar charts. -->
-    <!-- Visualization & Content Choices: 1. Information/Hero -> Goal: Inform -> Viz: Structured text blocks + KPIs -> Interaction: Linear reading -> Justification: Immediately provides context and vision. 2. Relevant Projects -> Goal: Explore -> Viz: Interactive Master-Detail Layout -> Interaction: Click on role list to update detail pane -> Justification: Keeps the interface clean while offering specific deep dives into robust simulations. 3. Education -> Goal: Organize -> Viz: Flexible Cards -> Interaction: Hover effects -> Justification: Clearly shows the global path. 4. Skills -> Goal: Categorize & Compare -> Viz: Horizontal Bar Charts (Chart.js) in a Grid -> Interaction: Hover tooltips -> Justification: Visually dissects and highlights proficiency across distinct domains (Hard, Soft, Tech, Languages) providing targeted, granular insights on a 1-10 scale. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
+    <!-- Application Structure Plan: The SPA is designed as an interactive professional dashboard. -->
+    
     <style>
-        .chart-container-small {
-            position: relative;
-            width: 100%;
-            margin: 0 auto;
-            height: 380px; /* Adattato per le barre */
-        }
-        @media (min-width: 768px) {
-            .chart-container-small {
-                height: 420px; /* Adattato per i monitor grandi */
-            }
-        }
         .unicode-icon {
             font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
         }
@@ -58,7 +44,7 @@
                     <a href="#projects" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Projects</a>
                     <a href="#education" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Education</a>
                     <a href="#skills" class="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Skills</a>
-                    <a href="https://drive.google.com/file/d/1_GqQrx_GDRzAGMFdrlVZWWEDy-3bU3Lj/view?usp=drive_link" target="_blank" class="text-sm font-bold text-teal-600 hover:text-teal-700 transition-colors flex items-center bg-teal-50 px-3 py-1.5 rounded-md border border-teal-100"><span class="mr-1">📄</span> CV</a>
+                    <a href="https://drive.google.com/file/d/1uoIVZAJLiCtMAEk3k2BLz79D6NepzDSq/view?usp=sharing" target="_blank" class="text-sm font-bold text-teal-600 hover:text-teal-700 transition-colors flex items-center bg-teal-50 px-3 py-1.5 rounded-md border border-teal-100"><span class="mr-1">📄</span> CV</a>
                 </div>
             </div>
         </div>
@@ -96,19 +82,19 @@
                         </p>
                         
                         <p class="bg-teal-50 p-4 rounded-lg border border-teal-100 text-teal-900 text-sm font-medium">
-                            <span class="unicode-icon mr-2">📩</span> I am always open to connecting with legal and corporate professionals. Contact me on LinkedIn or via email at: <a href="mailto:giumat.raso02@gmail.com" class="text-teal-700 hover:underline">giumat.raso02@gmail.com</a>.
+                            <span class="unicode-icon mr-2">📩</span> I am always open to connecting with legal and corporate professionals. Contact me on LinkedIn or via email at: <a href="#" onclick="copyEmail(event, this)" class="text-teal-700 hover:underline cursor-pointer">giumat.raso02@gmail.com</a>.
                         </p>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="mailto:giumat.raso02@gmail.com" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 transition-colors">
-                        <span class="unicode-icon mr-2">📧</span> Send Email
+                    <a href="#" onclick="copyEmail(event, this)" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 transition-colors min-w-[140px]">
+                        <span class="unicode-icon mr-2">📧</span> Copy Email
                     </a>
                     <a href="https://www.linkedin.com/in/giuseppe-mattia-raso-" target="_blank" class="inline-flex items-center px-4 py-2 border border-slate-300 text-sm font-medium rounded-md shadow-sm text-slate-700 bg-white hover:bg-slate-50 transition-colors">
                         <span class="unicode-icon mr-2">🔗</span> LinkedIn Profile
                     </a>
-                    <a href="https://drive.google.com/file/d/1_GqQrx_GDRzAGMFdrlVZWWEDy-3bU3Lj/view?usp=drive_link" target="_blank" class="inline-flex items-center px-4 py-2 border border-teal-500 text-sm font-bold rounded-md shadow-sm text-teal-700 bg-teal-50 hover:bg-teal-100 transition-colors">
+                    <a href="https://drive.google.com/file/d/1uoIVZAJLiCtMAEk3k2BLz79D6NepzDSq/view?usp=sharing" target="_blank" class="inline-flex items-center px-4 py-2 border border-teal-500 text-sm font-bold rounded-md shadow-sm text-teal-700 bg-teal-50 hover:bg-teal-100 transition-colors">
                         <span class="unicode-icon mr-2">📄</span> View Full CV
                     </a>
                     <span class="inline-flex items-center px-4 py-2 text-sm text-slate-600">
@@ -344,58 +330,117 @@
             </div>
         </section>
 
-        <!-- Interactive Skills Dashboard (Multiple Bar Charts) -->
+        <!-- Modern Skills Section (Tags/Badges layout) -->
         <section id="skills" class="scroll-mt-20">
             <div class="mb-10 text-center max-w-3xl mx-auto">
                 <h3 class="text-3xl font-bold text-slate-900 flex items-center justify-center">
-                    <span class="unicode-icon mr-3 text-teal-600">📊</span> Core Skills Dashboard
+                    <span class="unicode-icon mr-3 text-teal-600">🎯</span> Core Competencies
                 </h3>
                 <p class="mt-4 text-slate-600 leading-relaxed">
-                    A granular breakdown of my core competencies categorized into distinct operational domains. Hover over the bars for detailed proficiency scores (Scale 1-10).
+                    A comprehensive overview of my professional skillset, spanning legal foundations, interpersonal capabilities, and modern operational tools.
                 </p>
             </div>
 
-            <!-- Dashboard Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <!-- Hard Skills -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-                    <h4 class="text-xl font-bold text-slate-800 mb-2 flex items-center justify-center">
-                        <span class="unicode-icon mr-2">⚖️</span> Hard Skills
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
+                        <span class="unicode-icon mr-3 text-2xl">⚖️</span> Hard Skills
                     </h4>
-                    <div class="chart-container-small">
-                        <canvas id="hardSkillsChart"></canvas>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Legal Operations</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Contract Lifecycle Management (CLM)</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Process Digitalization</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Contract Drafting & Negotiation</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Due Diligence</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">M&A Strategy</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Corporate Governance</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">Financial Statement Analysis</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">GDPR Compliance</span>
+                        <span class="bg-teal-50 text-teal-800 border border-teal-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-teal-100 transition-colors">D. Lgs. 231/2001</span>
                     </div>
                 </div>
 
                 <!-- Soft Skills -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-                    <h4 class="text-xl font-bold text-slate-800 mb-2 flex items-center justify-center">
-                        <span class="unicode-icon mr-2">🧠</span> Soft Skills
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
+                        <span class="unicode-icon mr-3 text-2xl">🧠</span> Soft Skills
                     </h4>
-                    <div class="chart-container-small">
-                        <canvas id="softSkillsChart"></canvas>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Cross-functional Communication</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Teamwork</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Problem-solving</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Critical Thinking</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Time Management</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Stakeholder Management</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Accountability</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Learning Agility</span>
+                        <span class="bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-lg text-sm font-semibold hover:bg-blue-100 transition-colors">Tech-Savviness / Digital Mindset</span>
                     </div>
                 </div>
 
-                <!-- Legal Tech & AI -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-                    <h4 class="text-xl font-bold text-slate-800 mb-2 flex items-center justify-center">
-                        <span class="unicode-icon mr-2">🤖</span> Legal Tech & AI / IT
+                <!-- Legal Tech & Process Design -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
+                        <span class="unicode-icon mr-3 text-2xl">🤖</span> Legal Tech & Process Design
                     </h4>
-                    <div class="chart-container-small">
-                        <canvas id="techSkillsChart"></canvas>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm font-bold text-slate-700 mb-2">Process Design & Automation</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">CLM Development</span>
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">Workflow Automation</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-700 mb-2">AI Prompting & Automation</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">Google AI Studio</span>
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">Gemini</span>
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">ChatGPT</span>
+                                <span class="bg-purple-50 text-purple-800 border border-purple-200 px-3 py-1 rounded-md text-sm font-medium">Copilot</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-700 mb-2">Data & Analysis Tools</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">Advanced MS Excel (Financial Analysis)</span>
+                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">MS Office Suite</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-700 mb-2">Legal Databases</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">DeJure</span>
+                                <span class="bg-slate-100 text-slate-700 border border-slate-200 px-3 py-1 rounded-md text-sm font-medium">OneLegale</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Languages -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-                    <h4 class="text-xl font-bold text-slate-800 mb-2 flex items-center justify-center">
-                        <span class="unicode-icon mr-2">🌍</span> Languages
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-4">
+                        <span class="unicode-icon mr-3 text-2xl">🌍</span> Languages
                     </h4>
-                    <p class="text-center text-xs text-slate-500 mb-2">English: B2 Advanced (Legal & Business) | Italian: Native</p>
-                    <div class="chart-container-small">
-                        <canvas id="languagesChart"></canvas>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h5 class="text-base font-bold text-slate-900">Italian</h5>
+                                <p class="text-sm text-slate-500">Native Proficiency</p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Native</span>
+                        </div>
+                        <div class="border-t border-slate-100 pt-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h5 class="text-base font-bold text-slate-900">English</h5>
+                                    <p class="text-sm text-slate-500">B2 Advanced - Legal & Business English</p>
+                                </div>
+                                <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">B2</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -417,7 +462,7 @@
                     <p class="text-teal-100 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
                         Download or view my complete Curriculum Vitae to explore my full academic background, professional experiences, and certifications in depth.
                     </p>
-                    <a href="https://drive.google.com/file/d/1_GqQrx_GDRzAGMFdrlVZWWEDy-3bU3Lj/view?usp=drive_link" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-xl text-teal-700 bg-white hover:bg-slate-50 shadow-md transition-all transform hover:-translate-y-1">
+                    <a href="https://drive.google.com/file/d/1uoIVZAJLiCtMAEk3k2BLz79D6NepzDSq/view?usp=sharing" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-xl text-teal-700 bg-white hover:bg-slate-50 shadow-md transition-all transform hover:-translate-y-1">
                         <span class="unicode-icon mr-2 text-xl">⬇️</span> View / Download CV
                     </a>
                 </div>
@@ -579,163 +624,45 @@
             }
         }
 
-        /* --- MULTIPLE SKILLS CHARTS LOGIC (HORIZONTAL BARS) --- */
-        
-        // Reusable function to create horizontal bar charts
-        function createBarChart(canvasId, labels, dataSetsConfig) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
+        // Email Copy Function
+        function copyEmail(event, element) {
+            event.preventDefault();
+            const email = 'giumat.raso02@gmail.com';
             
-            // Format datasets
-            const datasets = dataSetsConfig.map(ds => ({
-                label: ds.label,
-                data: ds.data,
-                backgroundColor: ds.bgColor,
-                borderColor: ds.borderColor,
-                borderWidth: 1,
-                borderRadius: 4
-            }));
+            // Creazione di un elemento temporaneo per copiare il testo in sicurezza
+            const textArea = document.createElement("textarea");
+            textArea.value = email;
+            textArea.style.position = "fixed"; // Evita lo scroll della pagina
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: datasets
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y', // Rende il grafico orizzontale
-                    scales: {
-                        x: {
-                            min: 0,
-                            max: 10, // Scala impostata a 10
-                            ticks: {
-                                stepSize: 1,
-                                font: { size: 11, family: 'sans-serif' }
-                            },
-                            grid: { color: 'rgba(226, 232, 240, 0.4)' }
-                        },
-                        y: {
-                            ticks: {
-                                font: { size: 11, family: 'sans-serif', weight: '600' },
-                                color: '#475569',
-                                autoSkip: false // Assicura che si vedano tutte le etichette
-                            },
-                            grid: { display: false }
-                        }
-                    },
-                    plugins: {
-                        legend: { 
-                            display: datasets.length > 1, 
-                            position: 'bottom',
-                            labels: {
-                                usePointStyle: true,
-                                boxWidth: 8,
-                                font: { size: 12 }
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                            titleFont: { size: 13, family: 'sans-serif' },
-                            bodyFont: { size: 12, family: 'sans-serif' },
-                            padding: 10,
-                            callbacks: {
-                                title: function(context) {
-                                    let labelArr = context[0].label;
-                                    return Array.isArray(labelArr) ? labelArr.join(' ') : labelArr;
-                                },
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.raw}/10`;
-                                }
-                            }
-                        }
-                    },
-                    animation: { duration: 1000, easing: 'easeOutQuart' }
+            try {
+                document.execCommand('copy');
+                // Fornisce un feedback visivo immediato
+                const originalHTML = element.innerHTML;
+                
+                if (element.classList.contains('inline-flex')) {
+                    element.innerHTML = '<span class="unicode-icon mr-2">✅</span> Copied!';
+                } else {
+                    element.innerHTML = 'Copied! ✅';
                 }
-            });
+                
+                // Ripristina il testo originale dopo 2 secondi
+                setTimeout(() => {
+                    element.innerHTML = originalHTML;
+                }, 2000);
+            } catch (err) {
+                console.error('Unable to copy email', err);
+            }
+            
+            document.body.removeChild(textArea);
         }
 
-        // Initialize charts when the DOM is loaded
+        // Initialize view
         window.addEventListener('DOMContentLoaded', () => {
-            
-            // 1. Hard Skills Chart (Teal)
-            createBarChart('hardSkillsChart', 
-                [
-                    ['Contract Drafting', '& Negotiation'], 
-                    'Due Diligence', 
-                    'M&A Strategy', 
-                    'Corporate Gov.', 
-                    'Corp. Housekeeping', 
-                    ['Financial Statement', 'Analysis'], 
-                    'GDPR Compliance', 
-                    'D.Lgs. 231/2001', 
-                    'Legal Research', 
-                    'Project Mgmt.'
-                ],
-                [{
-                    label: 'Proficiency',
-                    data: [8, 9, 9, 9, 9, 7, 8, 8, 7, 7], // Valori su base 10
-                    bgColor: 'rgba(13, 148, 136, 0.85)', // Colore più solido per le barre
-                    borderColor: 'rgba(13, 148, 136, 1)'
-                }]
-            );
-
-            // 2. Soft Skills Chart (Blue)
-            createBarChart('softSkillsChart', 
-                [
-                    ['Cross-functional', 'Communication'], 
-                    'Teamwork', 
-                    'Problem-solving', 
-                    'Critical Thinking', 
-                    'Time Management', 
-                    'Stakeholder Mgmt.', 
-                    'Accountability', 
-                    'Learning Agility', 
-                    ['Tech-Savviness /', 'Digital Mindset']
-                ],
-                [{
-                    label: 'Proficiency',
-                    data: [8, 9, 9, 8, 8, 7, 7, 8, 9], // Valori su base 10
-                    bgColor: 'rgba(59, 130, 246, 0.85)',
-                    borderColor: 'rgba(59, 130, 246, 1)'
-                }]
-            );
-
-            // 3. Legal Tech & IT Chart (Purple)
-            createBarChart('techSkillsChart', 
-                [
-                    ['AI Prompting', '(Gemini, ChatGPT, Copilot)'], 
-                    ['Advanced MS Office', '(Excel for Finance)'], 
-                    ['Legal Databases', '(DeJure, OneLegale)']
-                ],
-                [{
-                    label: 'Proficiency',
-                    data: [9, 9, 8], // Valori su base 10
-                    bgColor: 'rgba(139, 92, 246, 0.85)',
-                    borderColor: 'rgba(139, 92, 246, 1)'
-                }]
-            );
-
-            // 4. Languages Chart (Green for Italian, Amber for English)
-            createBarChart('languagesChart', 
-                ['Listening', 'Speaking', 'Reading', 'Writing'],
-                [
-                    {
-                        label: 'Italian (Native)',
-                        data: [10, 10, 10, 10], // Base 10
-                        bgColor: 'rgba(16, 185, 129, 0.85)',
-                        borderColor: 'rgba(16, 185, 129, 1)'
-                    },
-                    {
-                        label: 'English (B2 Advanced)',
-                        data: [8, 8, 9, 7], // Ascolto 8, Parlato 8, Lettura 9, Scrittura 7
-                        bgColor: 'rgba(245, 158, 11, 0.85)',
-                        borderColor: 'rgba(245, 158, 11, 1)'
-                    }
-                ]
-            );
-
-            // Load default experience detail
             updateExperience('clmpactum'); 
         });
 
